@@ -15,6 +15,6 @@ def prints(x, y, operator):
         if(operator == '/'):
             return x/y
     except ZeroDivisionError:
-        print("can't devide because '0'")
+        return -1
 print(prints(args.x, args.y, args.operator))
 
