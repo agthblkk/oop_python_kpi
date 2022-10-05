@@ -5,13 +5,16 @@ parser.add_argument('operator', type=str)
 parser.add_argument('y', type=int)
 args = parser.parse_args()
 def prints(x, y, operator):
-    if(operator == '+'):
-        return x+y
-    if(operator == '-'):
-        return x-y
-    if(operator == 'x'):
-        return x*y
-    if(operator == '/'):
-        return x/y
+    try:
+        if(operator == '+'):
+            return x+y
+        if(operator == '-'):
+            return x-y
+        if(operator == 'x'):
+            return x*y
+        if(operator == '/'):
+            return x/y
+    except ZeroDivisionError:
+        print("can't devide because '0'")
 print(prints(args.x, args.y, args.operator))
 
