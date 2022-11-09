@@ -4,12 +4,13 @@ from random import randrange
 
 
 class Ticket:
-    def __init__(self, id, event, date):
+    def __init__(self, id, event, date, price, discount):
         if isinstance(id, int):
             self.id = id
             self.event = event
             self.date = str(date)
-            self.price = 10
+            self.discount = discount
+            self.price = 10 - (price * self.discount / 100)
             self.total = 0
         else:
             raise TypeError
@@ -28,60 +29,18 @@ class Ticket:
 
 
 class Advanceticket(Ticket):
-    def __init__(self, id, event, date):
-        super().__init__(id, event, date)
-        self.priceA = self.price - (self.price * 40 / 100)
-        self.total = 0
-
-    def howmuch(self):
-        return self.priceA
-
-    def buy(self, quantity):
-        self.total += self.priceA * quantity
-
-    def totalP(self):
-        return self.total
-
-    def __str__(self):
-        return 'A ticket number {self.id}, costs {self.priceA} for {self.event}, {self.date}'.format(self=self)
+    def __init__(self, id, event, date, price, discount):
+        super().__init__(id, event, date, price, discount)
 
 
 class Studentticket(Ticket):
-    def __init__(self, id, event, date):
-        super().__init__(id, event, date)
-        self.priceS = self.price - (self.price * 50 / 100)
-        self.total = 0
-
-    def howmuch(self):
-        return self.priceS
-
-    def buy(self, quantity):
-        self.total += self.priceS * quantity
-
-    def totalP(self):
-        return self.total
-
-    def __str__(self):
-        return 'A ticket number {self.id}, costs {self.priceS} for {self.event}, {self.date}'.format(self=self)
+    def __init__(self, id, event, date, price, discount):
+        super().__init__(id, event, date, price, discount)
 
 
 class Lateticket(Ticket):
-    def __init__(self, id, event, date):
-        super().__init__(id, event, date)
-        self.priceL = self.price + (self.price * 10 / 100)
-        self.total = 0
-
-    def howmuch(self):
-        return self.priceL
-
-    def buy(self, quantity):
-        self.total += self.priceL * quantity
-
-    def totalP(self):
-        return self.total
-
-    def __str__(self):
-        return 'A ticket number {self.id}, costs {self.priceL} for {self.event}, {self.date}'.format(self=self)
+    def __init__(self, id, event, date, price, discount):
+        super().__init__(id, event, date, price, discount)
 
 
 def write(data, filename):
@@ -128,8 +87,8 @@ if __name__ == '__main__':
 
     dict = {}
 
-    ticket1 = Ticket(1, event1, data1)
-    ticket2 = Advanceticket(2, event2, data2)
+    ticket1 = Ticket(1, event1, data1, 10, 0)
+    ticket2 = Advanceticket(2, event2, data2, 10, 40)
 
     dict["ticket1"] = ticket1.__dict__
     dict["ticket2"] = ticket2.__dict__
